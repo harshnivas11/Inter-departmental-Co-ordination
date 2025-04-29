@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - {{ department | capitalize }} Department</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <h1>Welcome to the {{ department | capitalize }} Dashboard</h1>
+    {% if session.get('department') %}
+        <li><a href="/chat">Chat</a></li>
+        {% endif %}
+
+    <table border="1">
+        <tr>
+            <th>Project Name</th>
+            <th>Status</th>
+            <th>Update Status</th>
+            <th>Proof</th>
+        </tr>
+        {% for project in projects %}
+        <form method="POST" action="/update_project/{{ project.Project_ID }}" enctype="multipart/form-data">
+        <tr>
+            <td>{{ project.Project_Name }}</td>
+            <td>{{ project.Status }}</td>
+            <td>
+                <select name="status">
+                    <option value="Not Started" {% if project.Status == 'Not Started' %}selected{% endif %}>Not Started</option>
+                    <option value="In Progress" {% if project.Status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                    <option value="Completed" {% if project.Status == 'Completed' %}selected{% endif %}>Completed</option>
+                </select>
+            </td>
+            <td>
+                <input type="file" name="proof" accept=".jpg,.jpeg,.png">
+                <button type="submit">Update</button>
+                {% if project.Proof %}
+                    <br><img src="{{ url_for('static', filename=project.Proof) }}" width="100">
+                {% endif %}
+            </td>
+        </tr>
+        </form>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

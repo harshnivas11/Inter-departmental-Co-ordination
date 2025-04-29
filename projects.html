@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Projects</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <h1>All Projects</h1>
+    <ul>
+        {% for project in projects %}
+            <li>
+                <strong>{{ project.Project_Name }}</strong><br>
+                Location: {{ project.Location }}<br>
+                Start Date: {{ project.Start_Date }}<br>
+                End Date: {{ project.End_Date }}<br>
+                Department ID: {{ project.Department_ID }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

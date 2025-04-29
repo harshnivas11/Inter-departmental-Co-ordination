@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interdepartmental Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav>
+    <h1>CityCollab</h1>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register_project">Register Project</a></li>
+        {% if session.get('department') %}
+        <li><a href="/chat">Chat</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<section class="hero">
+    <h2>Inter-Departmental coordination</h2>
+    <p>One Platform, United Departments — Building Smarter Cities Together.</p>
+    <div class="buttons">
+        <a href="/login"><button>Get Started</button></a>
+        <a href="/register_project"><button>Register Project</button></a>
+    </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <h1>Welcome, Admin</h1>
+    <p style="text-align:center; margin: 20px;">
+        <a href="/chat" style="color:#00d9ff; font-weight:bold; text-decoration:none;">💬 Inter-Department Chat</a>
+    </p>
+
+    <table border="1">
+        <tr>
+            <th>Project Name</th>
+            <th>Department</th>
+            <th>Status</th>
+            <th>Proof</th>
+        </tr>
+        {% for project in projects %}
+        <tr>
+            <td>{{ project.Project_Name }}</td>
+            <td>{{ project.Department_Name }}</td>
+            <td>{{ project.Status }}</td>
+            <td>
+                {% if project.Proof %}
+                    <img src="{{ url_for('static', filename=project.Proof) }}" width="150">
+                {% else %}
+                    No proof uploaded
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2 style="margin-top:50px;">Future Projects (Unassigned)</h2>
+{% if future_projects %}
+<table border="1">
+    <tr>
+        <th>Project Name</th>
+        <th>Assign To Department</th>
+        <th>Action</th>
+    </tr>
+    {% for project in future_projects %}
+    <tr>
+        <form method="POST" action="/assign_project/{{ project.Project_ID }}">
+            <td>{{ project.Project_Name }}</td>
+            <td>
+                <select name="department_id" required>
+                    {% for dept in departments %}
+                        <option value="{{ dept.Department_ID }}">{{ dept.Department_Name | capitalize }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <td><button type="submit">Assign</button></td>
+        </form>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>All future projects have been assigned!</p>
+{% endif %}
+<h2>Add a New Future Project</h2>
+<form method="POST" action="/add_future_project">
+    <label for="project_name">Project Name:</label>
+    <input type="text" name="project_name" placeholder="e.g. Smart Water Management" required>
+    <button type="submit">Add Project</button>
+</form>
+<br><br>
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Department Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<h2>Department Chat - Logged in as: {{ sender | capitalize }}</h2>
+
+<form method="POST">
+    <input type="hidden" name="sender" value="{{ sender }}">
+
+    <label for="receiver"><strong>Send To:</strong></label>
+    <select name="receiver" required>
+        {% for dept in departments %}
+            <option value="{{ dept.Department_Name }}">{{ dept.Department_Name | capitalize }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="message"><strong>Message:</strong></label>
+    <textarea name="message" rows="3" required></textarea>
+
+    <input type="submit" value="Send">
+</form>
+
+<hr>
+
+<h3>Chat History (Your Conversations)</h3>
+<div class="chat-box">
+    {% for chat in chat_history %}
+        <p>
+            <strong>{{ chat.Sender_Department }}</strong> ➜ 
+            <strong>{{ chat.Receiver_Department }}</strong>:
+            {{ chat.Message }}
+            <em style="color: #bbb;">({{ chat.Timestamp }})</em>
+        </p>
+    {% else %}
+        <p style="color: gray;">No messages yet.</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>

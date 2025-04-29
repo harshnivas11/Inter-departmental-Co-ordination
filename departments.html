@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Departments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <h1>All Departments</h1>
+    <ul>
+        {% for dept in departments %}
+            <li>
+                <strong>{{ dept.Department_Name }}</strong> - {{ dept.Department_Type }}<br>
+                Contact: {{ dept.Contact_Info }}<br>
+                Resources: {{ dept.Resources }}<br>
+                Tasks: {{ dept.Tasks }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
