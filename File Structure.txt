@@ -1,0 +1,21 @@
+File Structure:
+DBMS_PROJECT/
+│
+├── app.py                      # Main Flask application
+├── a.exe                       # (Optional executable, if used)
+│
+├── static/                    # Static files (CSS, uploads)
+│   ├── css/
+│   │   └── style.css          # Custom stylesheet
+│   └── uploads/               # Uploaded proof images
+│
+├── templates/                 # HTML templates (Jinja2)
+│   ├── admin_dashboard.html   # Admin project management view
+│   ├── chat.html              # Chat interface for departments
+│   ├── dashboard.html         # Department dashboard
+│   ├── departments.html       # (Optional) Department listing
+│   ├── home.html              # Home page
+│   ├── login.html             # Login page
+│   ├── projects.html          # (Optional) General project listing
+│   └── register_project.html  # Form to register new projects
+screenshots - of the inter-departmental co-ordination website
